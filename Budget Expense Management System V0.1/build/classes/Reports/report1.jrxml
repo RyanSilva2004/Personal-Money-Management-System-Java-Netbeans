@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5ca6cb24-d186-4208-9a33-8eddac04c6db">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+    tbl_accounts.*, 
+    tbl_expense.*, 
+    tbl_income.*, 
+    SUM(tbl_expense.ex_amount) AS TotalExpense, 
+    SUM(tbl_income.in_amount) AS TotalIncome,
+    SUM(tbl_income.in_amount) - SUM(tbl_expense.ex_amount) AS IncomeExpenseDifference
+FROM 
+    budget_management_system_db.tbl_accounts 
+LEFT JOIN 
+    budget_management_system_db.tbl_expense ON tbl_accounts.acc_email = tbl_expense.ex_email
+LEFT JOIN 
+    budget_management_system_db.tbl_income ON tbl_accounts.acc_email = tbl_income.in_email
+GROUP BY 
+    tbl_accounts.acc_email;]]>
+	</queryString>
+	<field name="acc_email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="acc_fname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="acc_lname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="acc_bd" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="acc_password" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ex_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ex_email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ex_category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ex_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ex_amount" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ex_note" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ex_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="in_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="in_email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="in_category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="in_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="in_amount" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="in_note" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="in_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalExpense" class="java.math.BigDecimal"/>
+	<field name="TotalIncome" class="java.math.BigDecimal"/>
+	<field name="IncomeExpenseDifference" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="752" height="46" backcolor="#000066" uuid="a83d08af-ac30-4a7f-a307-9b466f6f6932"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="274" y="13" width="211" height="23" forecolor="#FFFFFF" uuid="75c6720b-c3bd-410a-8195-c9a78af563c6"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="18"/>
+				</textElement>
+				<text><![CDATA[Income / Expense Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="15" width="72" height="20" uuid="0c1fec3e-b67f-4cce-bcee-55a3510263dc"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[First Name :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="72" y="15" width="168" height="20" uuid="36e56c10-2d53-45b8-991f-f2c40c963895"/>
+				<textFieldExpression><![CDATA[$F{acc_fname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="240" y="15" width="72" height="20" uuid="ee8ef65f-388b-43c8-8f51-2dd80cae0032"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Last Name :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="312" y="15" width="173" height="20" uuid="d1e8fee7-a715-40ab-b7ff-b91cca8d1997"/>
+				<textFieldExpression><![CDATA[$F{acc_lname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="485" y="15" width="42" height="20" uuid="7a0e6b13-1f59-4289-b1ae-61266002a5ff"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Email :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="527" y="15" width="225" height="20" uuid="d1f1e83e-7682-41a8-81d8-a0627ce60cc4"/>
+				<textFieldExpression><![CDATA[$F{acc_email}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="752" height="79" backcolor="#CCCCCC" uuid="a1ace4bb-45d8-4efa-8de0-f57bf844b3b2"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="12" y="14" width="95" height="17" uuid="be543e94-31d8-4b75-8a18-ecbdb45ea3b3"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Total Income    :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="107" y="14" width="205" height="17" uuid="cb0b12e1-7110-4889-884d-4b69cca27e93"/>
+				<textFieldExpression><![CDATA[$F{TotalIncome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="31" width="95" height="17" uuid="4ea402a0-9f92-4eb5-9265-b57b67895867"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Total Expense  :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="107" y="31" width="205" height="17" uuid="e514230d-9665-40c1-a2a8-fe131c74f905"/>
+				<textFieldExpression><![CDATA[$F{TotalExpense}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="48" width="117" height="17" uuid="3e8de897-9fbe-443c-ac0c-9a714f7308b5"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Remaning Budget :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="129" y="48" width="183" height="17" uuid="20283f2d-1a82-4c4f-a4ce-fe10c3708ecf"/>
+				<textFieldExpression><![CDATA[$F{IncomeExpenseDifference}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="211" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="13" width="95" height="17" uuid="0ecfac6b-d276-428f-bdb6-e573973d50c0"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Income Records]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="40" width="228" height="17" uuid="651cb7f3-9394-40d5-a1a1-6ddfb96ae6db"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Income Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="40" width="157" height="17" uuid="6c75107a-328f-47a0-a9a2-425711740186"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Income Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="40" width="157" height="17" uuid="a7d2e17f-b71d-4cd9-aaff-7d55da0441c4"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Income  Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="554" y="40" width="185" height="17" uuid="ddf0c149-e953-4061-b60d-494b6b6cd9dd"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Income  Category]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="12" y="57" width="228" height="20" uuid="03b18f3d-9bae-4e2d-bb8d-dea79bc2aba1"/>
+				<textFieldExpression><![CDATA[$F{in_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="556" y="57" width="183" height="20" uuid="b7a58ef7-b206-403f-bd36-5a7ea31e0456"/>
+				<textFieldExpression><![CDATA[$F{in_category}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="57" width="157" height="20" uuid="7ce0c998-7424-41be-b795-3d1b95ada82a"/>
+				<textFieldExpression><![CDATA[$F{in_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="57" width="157" height="20" uuid="8ff3012f-76d3-4a83-93c9-65ec8f61a8ce"/>
+				<textFieldExpression><![CDATA[$F{in_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="397" y="133" width="157" height="17" uuid="a780e676-05d3-44a1-8cc9-d42b83db641b"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Expense Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="106" width="95" height="17" uuid="3dddeacb-cf0a-4b16-85fe-ac48ee5db627"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Expense Records]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="133" width="157" height="17" uuid="5027853d-6dfc-45ab-8cf2-0ff2dd4747f8"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Expense Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="554" y="133" width="185" height="17" uuid="513455cc-4faa-44b1-bdcd-46ec96a13a2d"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Expense Category]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="133" width="228" height="17" uuid="f460af60-bf84-4c84-b05c-7ea934785f24"/>
+				<textElement>
+					<font fontName="Diodrum Cyrillic Semibold" size="12"/>
+				</textElement>
+				<text><![CDATA[Expense Name]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="12" y="150" width="228" height="20" uuid="5cd030e2-0d01-482a-b460-39ff1f92710e"/>
+				<textFieldExpression><![CDATA[$F{ex_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="150" width="154" height="20" uuid="b9c2d300-a3c8-479f-a2d9-7d9c7bb24627"/>
+				<textFieldExpression><![CDATA[$F{ex_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="394" y="150" width="160" height="20" uuid="f707ea37-56de-4ea0-8b30-300e6ac015e9"/>
+				<textFieldExpression><![CDATA[$F{ex_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="556" y="150" width="183" height="20" uuid="a44b530e-7b84-4311-af89-06b50b4112a6"/>
+				<textFieldExpression><![CDATA[$F{ex_category}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="18" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
